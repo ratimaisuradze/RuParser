@@ -11,6 +11,11 @@ Class RuParser
         } 
     }
 
+    private function parseINI($file){
+        $arr = parse_ini_file($file); 
+        return; 
+    }
+    
     public function welcome(){
         echo 'Hello World';
     }
