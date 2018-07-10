@@ -1,0 +1,11 @@
+#!/usr/bin/php
+<?php   
+require __DIR__ . '/core/main.class.php';
+use RuParser\RuParser as Parser; 
+
+    //პარსერის დაკონფიგურება. 
+    $paser = new Parser([
+        'welcome' => 'RuPaser'
+    ]);
+    
+?>
