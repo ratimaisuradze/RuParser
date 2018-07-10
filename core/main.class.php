@@ -4,6 +4,7 @@ namespace RuParser;
 require __DIR__ . '/../../../vendor/autoload.php';
 
 use PHPHtmlParser\Dom;
+use \Curl\MultiCurl;
 
 Class RuParser
 {
@@ -37,12 +38,43 @@ Class RuParser
         }
     }
 
-    public function getContent($domObject){
-
+    public function ParsePage($htmlContent){
+        $parse = []; 
+        $dom = new Dom; 
+        $a = $dom->load($htmlContent); 
+        return [
+            'title' => $dom->find('title')->innerHTML,
+            'desc' =>  $dom->find('meta')[1]->getAttribute('content'),
+            'image' => $dom->find('.fullimg div img')[0]->getAttribute('src'), 
+            'content' => $dom->find("span[itemprop='description']")->innerHTML
+        ]; 
     }
 
-    public function saveContent($array){
+    public function MultiCurlRequest($links){
 
+        $multi_curl = new MultiCurl; 
+        
+        // Callback Data Before Send multi_curl Request
+        $multi_curl->beforeSend(function ($instance)  {
+
+        });
+        
+        // CallBack After Success multi_curl Request
+        $multi_curl->success(function ($instance){ 
+            $domHtml = $instance->response;
+            print_r($this->ParsePage($domHtml)); 
+        });
+
+        // Error Log
+        $multi_curl->error(function ($instance){
+            //$bot->lastComment = $instance->errorMessage;         
+        });
+
+        foreach($links as $link){
+            $multi_curl->addGet($link);            
+        }
+
+        $multi_curl->start();
     }
 }        
 ?>
