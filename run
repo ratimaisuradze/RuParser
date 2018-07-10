@@ -10,13 +10,9 @@ $time = microtime(true);
         'welcome' => 'RuPaser'
     ]);    
 
-    $a = $parser->getHtmlbyPage('KinoGo', 'http://kinogo.eu/', '2'); 
-    
+    $a = $parser->getHtmlbyPage('KinoGo', 'http://kinogo.eu/', '2');     
     $parser->MultiCurlRequest($a); 
-
-    print_r($a);
-
-
+    
     echo  "\n" . (microtime(true) - $time ) . "\n";
   
 ?>
