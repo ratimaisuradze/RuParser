@@ -3,9 +3,18 @@
 require __DIR__ . '/core/main.class.php';
 use RuParser\RuParser as Parser; 
 
+$time = microtime(true);
+
     //პარსერის დაკონფიგურება. 
-    $paser = new Parser([
+    $parser = new Parser([
         'welcome' => 'RuPaser'
-    ]);
-    
+    ]);    
+
+    $a = $parser->getHtmlbyPage('KinoGo', 'http://kinogo.eu/', '2'); 
+
+    print_r($a);
+
+
+    echo  "\n" . (microtime(true) - $time ) . "\n";
+  
 ?>
