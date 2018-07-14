@@ -46,7 +46,7 @@ Class RuParser
         $a = $dom->load($htmlContent); 
         return [
             'title' => $dom->find('title')->innerHTML,
-            'desc' =>  $dom->find('meta')[1]->getAttribute('content'),
+            'description' =>  $dom->find('meta')[1]->getAttribute('content'),
             'image' => $dom->find('.fullimg div img')[0]->getAttribute('src'), 
             'content' => $dom->find("span[itemprop='description']")->innerHTML
         ]; 
@@ -58,13 +58,15 @@ Class RuParser
         
         // Callback Data Before Send multi_curl Request
         $multi_curl->beforeSend(function ($instance)  {
-
         });
         
         // CallBack After Success multi_curl Request
         $multi_curl->success(function ($instance){ 
             $domHtml = $instance->response;
-            print_r($this->ParsePage($domHtml)); 
+            // $Result-ს ენიჭება მასივი [title, description, image, content] 
+            $result = $this->ParsePage($domHtml); 
+            // შევინახოთ ბაზაში მოცემული მასივი
+            $this->saveInDB($result); 
         });
 
         // Error Log
@@ -79,8 +81,20 @@ Class RuParser
         $multi_curl->start();
     }
 
-    public function DB_TEST(){
+    public function saveInDB(array $res){
+        $db = new DB;
+        $sql = 'INSERT INTO `ContentList`(`title`, `description`, `image`, `content`) VALUES (:title, :description, :image, :content)'; 
+        // Statement PDO::prepare [განცხადების მოზადება]
+        $db->query($sql); 
+            
+        $db->bind(':title', $res['title']); 
+        $db->bind(':description', $res['description']); 
+        $db->bind(':image', $res['image']);
+        $db->bind(':content', $res['content']); 
         
+        $db->execute();
+
+
     }
 }        
 ?>

@@ -8,12 +8,21 @@ $time = microtime(true);
         'welcome' => 'RuPaser'
     ]);
 
-    // for($i=0; $i<10; $i++){
-    //     $a = $parser->getHtmlbyPage('KinoGo', 'http://kinogo.eu/', $i);     
-    //     $parser->MultiCurlRequest($a); 
-    // }
+    for($i=0; $i<2; $i++){
+        $links = $parser->getHtmlbyPage('KinoGo', 'http://kinogo.eu/', $i);
 
-    $parser->DB_TEST(); 
+        $parser->MultiCurlRequest($links); 
+
+    }
+
+    //$parser->DB_TEST(); 
+
+    // $parser->saveInDB([
+    //     'title' => 'this is a title', 
+    //     'description' => 'this is a description', 
+    //     'image' => 'https://www.test.com/dir/dir/dir/images.png',
+    //     'content' => 'dsadsadsadasdadasldksal;daksdl;as,.>?.dsdl0-3r k dl;askd;lasd;la skdadad'
+    // ]);
 
     echo  "\n" . (microtime(true) - $time ) . "\n";
   
