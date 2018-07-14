@@ -2,17 +2,19 @@
 <?php   
 require __DIR__ . '/core/main.class.php';
 use RuParser\RuParser as Parser; 
-
 $time = microtime(true);
-
     //პარსერის დაკონფიგურება. 
     $parser = new Parser([
         'welcome' => 'RuPaser'
-    ]);    
+    ]);
 
-    $a = $parser->getHtmlbyPage('KinoGo', 'http://kinogo.eu/', '2');     
-    $parser->MultiCurlRequest($a); 
-    
+    // for($i=0; $i<10; $i++){
+    //     $a = $parser->getHtmlbyPage('KinoGo', 'http://kinogo.eu/', $i);     
+    //     $parser->MultiCurlRequest($a); 
+    // }
+
+    $parser->DB_TEST(); 
+
     echo  "\n" . (microtime(true) - $time ) . "\n";
   
 ?>

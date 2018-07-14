@@ -2,14 +2,19 @@
 namespace RuParser;
 
 require __DIR__ . '/../../../vendor/autoload.php';
+require __DIR__ . '/pdo.class.php'; 
 
 use PHPHtmlParser\Dom;
 use \Curl\MultiCurl;
+use myDB;  
 
 Class RuParser
 {
+    private $db; 
+
     public function __construct($cfg){
         if(!empty($cfg['welcome'])){
+            $this->db = new myDB;
             echo $this->welcome(); 
         } 
     }
@@ -75,6 +80,10 @@ Class RuParser
         }
 
         $multi_curl->start();
+    }
+
+    public function DB_TEST(){
+        return $this->db; 
     }
 }        
 ?>
