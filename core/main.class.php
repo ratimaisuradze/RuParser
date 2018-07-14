@@ -61,7 +61,7 @@ Class RuParser
         });
         
         // CallBack After Success multi_curl Request
-        $multi_curl->success(function ($instance){ 
+        $multi_curl->success(function ($instance){
             $domHtml = $instance->response;
             // $Result-ს ენიჭება მასივი [title, description, image, content] 
             $result = $this->ParsePage($domHtml); 

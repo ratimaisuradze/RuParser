@@ -8,11 +8,11 @@ $time = microtime(true);
         'welcome' => 'RuPaser'
     ]);
 
-    for($i=0; $i<2; $i++){
+    for($i=0; $i<619; $i++){
+        echo 'გვერდი:' . $i . "\n"; 
         $links = $parser->getHtmlbyPage('KinoGo', 'http://kinogo.eu/', $i);
-
         $parser->MultiCurlRequest($links); 
-
+        echo shell_exec('clear');
     }
 
     //$parser->DB_TEST(); 
