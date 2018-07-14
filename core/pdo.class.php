@@ -1,10 +1,11 @@
 <?php
 namespace RuParser;  
+use \PDO; 
 Class myDB 
 {
     private $HOST = 'localhost';
     private $USER = 'root';
-    private $PASS = 'Qwerty22@@';
+    private $PASS = 'th1gam3r1@';
     private $DBNAME = 'ratBot'; 
     
     // ბაზასთან დაკავშირებული ცვლადი
@@ -16,7 +17,7 @@ Class myDB
 
     public function __construct(){
         //Set DNS 
-        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;  
+        $dns = 'mysql:host=' . $this->HOST . ';dbname=' . $this->DBNAME;  
         $options = array(  
             PDO::ATTR_PERSISTENT => true,  
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION

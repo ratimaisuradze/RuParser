@@ -6,15 +6,12 @@ require __DIR__ . '/pdo.class.php';
 
 use PHPHtmlParser\Dom;
 use \Curl\MultiCurl;
-use myDB;  
+use RuParser\myDB as DB;  
 
 Class RuParser
 {
-    private $db; 
-
     public function __construct($cfg){
         if(!empty($cfg['welcome'])){
-            $this->db = new myDB;
             echo $this->welcome(); 
         } 
     }
@@ -83,7 +80,7 @@ Class RuParser
     }
 
     public function DB_TEST(){
-        return $this->db; 
+        
     }
 }        
 ?>
